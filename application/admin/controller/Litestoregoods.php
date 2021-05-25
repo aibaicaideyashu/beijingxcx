@@ -19,7 +19,7 @@ class Litestoregoods extends Backend
      * @var \app\admin\model\Litestoregoods
      */
     protected $model = null;
-
+    protected $multiFields = 'goods_status';
     public function _initialize()
     {
         parent::_initialize();
@@ -28,9 +28,8 @@ class Litestoregoods extends Backend
 
         $this->model = new \app\admin\model\Litestoregoods;
         $this->view->assign("specTypeList", $this->model->getSpecTypeList());
-        $this->view->assign("deductStockTypeList", $this->model->getDeductStockTypeList());
+        $this->view->assign("attrTypeList", $this->model->getAttrTypeList());
         $this->view->assign("goodsStatusList", $this->model->getGoodsStatusList());
-        $this->view->assign("isDeleteList", $this->model->getIsDeleteList());
 
         $this->view->assign("spec_attr", '');
         $this->view->assign("spec_list", '');
@@ -61,13 +60,13 @@ class Litestoregoods extends Backend
             }
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
             $total = $this->model
-                    ->with(['category','freight'])
+                    ->with(['category'])
                     ->where($where)
                     ->order($sort, $order)
                     ->count();
 
             $list = $this->model
-                    ->with(['category','freight'])
+                    ->with(['category'])
                     ->where($where)
                     ->order($sort, $order)
                     ->limit($offset, $limit)
@@ -76,7 +75,6 @@ class Litestoregoods extends Backend
             foreach ($list as $row) {
                 
                 $row->getRelation('category')->visible(['name']);
-				$row->getRelation('freight')->visible(['name']);
             }
             $list = collection($list)->toArray();
             $result = array("total" => $total, "rows" => $list);

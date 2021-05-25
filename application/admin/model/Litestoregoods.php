@@ -19,9 +19,8 @@ class Litestoregoods extends Model
     // 追加属性
     protected $append = [
         'spec_type_text',
-        'deduct_stock_type_text',
+        'attr_type_text',
         'goods_status_text',
-        'is_delete_text'
     ];
     
 
@@ -39,20 +38,15 @@ class Litestoregoods extends Model
         return ['10' => __('Spec_type 10'),'20' => __('Spec_type 20')];
     }     
 
-    public function getDeductStockTypeList()
+    public function getAttrTypeList()
     {
-        return ['10' => __('Deduct_stock_type 10'),'20' => __('Deduct_stock_type 20')];
+        return ['1' => '团购','2' => '秒杀','3' => '积分'];
     }     
 
     public function getGoodsStatusList()
     {
-        return ['10' => __('Goods_status 10'),'20' => __('Goods_status 20')];
-    }     
-
-    public function getIsDeleteList()
-    {
-        return ['0' => __('Is_delete 0'),'1' => __('Is_delete 1')];
-    }     
+        return ['1' => __('Goods_status 10'),'0' => __('Goods_status 20')];
+    }
 
 
     public function getSpecTypeTextAttr($value, $data)
@@ -63,10 +57,10 @@ class Litestoregoods extends Model
     }
 
 
-    public function getDeductStockTypeTextAttr($value, $data)
+    public function getAttrTypeTextAttr($value, $data)
     {        
-        $value = $value ? $value : (isset($data['deduct_stock_type']) ? $data['deduct_stock_type'] : '');
-        $list = $this->getDeductStockTypeList();
+        $value = $value ? $value : (isset($data['attr_type']) ? $data['attr_type'] : '');
+        $list = $this->getAttrTypeList();
         return isset($list[$value]) ? $list[$value] : '';
     }
 
@@ -78,23 +72,9 @@ class Litestoregoods extends Model
         return isset($list[$value]) ? $list[$value] : '';
     }
 
-
-    public function getIsDeleteTextAttr($value, $data)
-    {        
-        $value = $value ? $value : (isset($data['is_delete']) ? $data['is_delete'] : '');
-        $list = $this->getIsDeleteList();
-        return isset($list[$value]) ? $list[$value] : '';
-    }
-
     public function category()
     {
         return $this->belongsTo('litestorecategory', 'category_id', 'id', [], 'LEFT')->setEagerlyType(0);
-    }
-
-
-    public function freight()
-    {
-        return $this->belongsTo('Litestorefreight', 'delivery_id', 'id', [], 'LEFT')->setEagerlyType(0);
     }
 
     /**

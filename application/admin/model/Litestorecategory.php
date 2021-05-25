@@ -4,8 +4,14 @@ namespace app\admin\model;
 
 use think\Model;
 
+
 class Litestorecategory extends Model
 {
+
+    
+
+    
+
     // 表名
     protected $name = 'litestore_category';
     
@@ -15,7 +21,8 @@ class Litestorecategory extends Model
     // 定义时间戳字段名
     protected $createTime = 'createtime';
     protected $updateTime = 'updatetime';
-    
+    protected $deleteTime = false;
+
     // 追加属性
     protected $append = [
 

@@ -5,7 +5,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             // 初始化表格参数配置
             Table.api.init({
                 extend: {
-                    index_url: 'litestorecategory/index',
+                    index_url: 'litestorecategory/index' + location.search,
                     add_url: 'litestorecategory/add',
                     edit_url: 'litestorecategory/edit',
                     del_url: 'litestorecategory/del',
@@ -20,18 +20,13 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             table.bootstrapTable({
                 url: $.fn.bootstrapTable.defaults.extend.index_url,
                 pk: 'id',
-                escape: false,
                 sortName: 'weigh',
-                pagination: false,
-                commonSearch: false,
                 columns: [
                     [
                         {checkbox: true},
                         {field: 'id', title: __('Id')},
-                        {field: 'pid', title: __('Pid')},
-                        //{field: 'name', title: __('Name')},
-                        {field: 'name', title: __('Name'), align: 'left'},
-                        {field: 'image', title: __('Image'), formatter: Table.api.formatter.image},
+                        {field: 'name', title: __('Name')},
+                        // {field: 'image', title: __('Image'), events: Table.api.events.image, formatter: Table.api.formatter.image},
                         {field: 'weigh', title: __('Weigh')},
                         {field: 'createtime', title: __('Createtime'), operate:'RANGE', addclass:'datetimerange', formatter: Table.api.formatter.datetime},
                         {field: 'updatetime', title: __('Updatetime'), operate:'RANGE', addclass:'datetimerange', formatter: Table.api.formatter.datetime},
@@ -39,8 +34,6 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                     ]
                 ]
             });
-
-            
 
             // 为表格绑定事件
             Table.api.bindevent(table);

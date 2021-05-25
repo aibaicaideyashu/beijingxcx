@@ -1,9 +1,40 @@
 <form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">商品类型:</label>
+        <div class="col-xs-12 col-sm-8">
 
+            <div class="radio">
+                {foreach name="attrTypeList" item="vo"}
+                <label for="row[attr_type]-{$key}"><input id="row[attr_type]-{$key}" name="row[attr_type]" type="radio" value="{$key}" {in name="key" value="1"}checked{/in} /> {$vo}</label>
+                {/foreach}
+            </div>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">缩略图:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+                <input id="c-avatar" data-rule="required" class="form-control form-control" size="50" name="row[avatar]" type="text">
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="plupload-avatar" class="btn btn-danger plupload" data-input-id="c-avatar" data-mimetype="image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-avatar"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                    <span><button type="button" id="fachoose-avatar" class="btn btn-primary fachoose" data-input-id="c-avatar" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                </div>
+                <span class="msg-box n-right" for="c-avatar"></span>
+            </div>
+            <ul class="row list-inline plupload-preview" id="p-avatar"></ul>
+        </div>
+    </div>
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Goods_name')}:</label>
         <div class="col-xs-12 col-sm-8">
             <input id="c-goods_name" data-rule="required" class="form-control form-control" name="row[goods_name]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">商品简介:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-goods_intro" data-rule="required" class="form-control form-control" name="row[goods_intro]" type="text" value="">
         </div>
     </div>
     <div class="form-group">
@@ -131,39 +162,17 @@
             <input id="c-stock_num" class="form-control form-control" name="spec[stock_num]" type="number" value="100">
         </div>
     </div>
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2">商品重量(Kg):</label>
-        <div class="col-xs-12 col-sm-8">
-            <input id="c-goods_weight" class="form-control form-control" name="spec[goods_weight]" type="number" value="1">
-        </div>
-    </div>
+
 </div>
 <!-- 商品规格属性 end -->
 
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2">{:__('Deduct_stock_type')}:</label>
-        <div class="col-xs-12 col-sm-8">
-                        
-            <select  id="c-deduct_stock_type" data-rule="required" class="form-control selectpicker" name="row[deduct_stock_type]">
-                {foreach name="deductStockTypeList" item="vo"}
-                    <option value="{$key}" {in name="key" value="20"}selected{/in}>{$vo}</option>
-                {/foreach}
-            </select>
-
-        </div>
-    </div>
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Content')}:</label>
         <div class="col-xs-12 col-sm-8">
             <textarea id="c-content" data-rule="required" class="form-control editor form-control" rows="5" name="row[content]" cols="50"></textarea>
         </div>
     </div>
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2">{:__('Sales_initial')}:</label>
-        <div class="col-xs-12 col-sm-8">
-            <input id="c-sales_initial" data-rule="required" class="form-control form-control" name="row[sales_initial]" type="number" value="0">
-        </div>
-    </div>
+
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Sales_actual')}:</label>
         <div class="col-xs-12 col-sm-8">
@@ -176,33 +185,16 @@
             <input id="c-goods_sort" data-rule="required" class="form-control form-control" name="row[goods_sort]" type="number" value="100">
         </div>
     </div>
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2">{:__('Delivery_id')}:</label>
-        <div class="col-xs-12 col-sm-8">
-            <input id="c-delivery_id" data-rule="required" data-source="litestorefreight/index" class="form-control selectpage form-control" name="row[delivery_id]" type="text" value="">
-        </div>
-    </div>
+
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Goods_status')}:</label>
         <div class="col-xs-12 col-sm-8">
             
             <div class="radio">
             {foreach name="goodsStatusList" item="vo"}
-            <label for="row[goods_status]-{$key}"><input id="row[goods_status]-{$key}" name="row[goods_status]" type="radio" value="{$key}" {in name="key" value="10"}checked{/in} /> {$vo}</label> 
+            <label for="row[goods_status]-{$key}"><input id="row[goods_status]-{$key}" name="row[goods_status]" type="radio" value="{$key}" {in name="key" value="1"}checked{/in} /> {$vo}</label>
             {/foreach}
             </div>
-
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2">{:__('Is_delete')}:</label>
-        <div class="col-xs-12 col-sm-8">
-                        
-            <select  id="c-is_delete" data-rule="required" class="form-control selectpicker" name="row[is_delete]">
-                {foreach name="isDeleteList" item="vo"}
-                    <option value="{$key}" {in name="key" value="0"}selected{/in}>{$vo}</option>
-                {/foreach}
-            </select>
 
         </div>
     </div>
